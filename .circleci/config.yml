@@ -3,10 +3,14 @@ jobs:
     working_directory: ~/build
     docker:
       - image: circleci/node:10
+
+      - image: postgres:9.4.1
+        environment:
+          POSTGRES_USER: root      
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker-compose --version
+      - run: docker ps
 
   deploy:
     working_directory: ~/build
