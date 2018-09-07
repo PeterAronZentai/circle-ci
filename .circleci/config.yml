@@ -1,0 +1,34 @@
+jobs:
+  build:
+    working_directory: ~/build
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: docker ps
+
+  deploy:
+    working_directory: ~/build
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: docker ps
+      
+workflows:
+  version: 2
+  build:
+    jobs:
+    - build:
+        filters:
+          branches:
+            only: master
+                          
+  deploy:
+    jobs:
+    - deploy:
+        filters:
+          branches:
+              only: master
